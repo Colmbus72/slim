@@ -1,0 +1,18 @@
+        
+        
+         ______     __         __     __    __
+        /\  ___\   /\ \       /\ \   /\ "-./  \
+        \ \___  \  \ \ \____  \ \ \  \ \ \-./\ \
+         \/\_____\  \ \_____\  \ \_\  \ \_\ \ \_\
+          \/_____/   \/_____/   \/_/   \/_/  \/_/
+        
+        
+        Please enter your workspace tokens:
+        
+        Workspace 1 <leader>1:
+        
+        To add new workspace press: ~
+        To test tokens press: tw<CR>
+        
+        To save config and overwrite current app run: :W
+

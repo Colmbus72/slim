@@ -1,0 +1,4 @@
+.data/*
+!.data/login_template.slima
+autoload/slim/airplane.vim
+notes
