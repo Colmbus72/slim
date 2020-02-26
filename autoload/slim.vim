@@ -9,12 +9,12 @@ function! slim#StartSlack()
         return
     endif
   
-    " if !filereadable(g:data_path.'/listen_cron')
-    "     call slim#Listen()
-    " endif
     call slim#app#init()
 endfunction
 
+" TODO: user will setup one command in crontab
+" that will run this every minute.
+" Need to efficiently send off background jobs to write to channel files
 function! slim#refreshChannels()
     call slim#loadPath()
     call slim#util#loadIdMap()
@@ -48,28 +48,10 @@ endfunction
 function! slim#Login()
     exe 'tabe '.g:data_path . '/login.slima'
     setlocal nowrap
-    " nnoremap <buffer> <CR> "wyi[:call slim#runCommand(@w)<CR>
     nnoremap <buffer> ~ :call slim#configure#addNewWorkspace()<CR>:w<CR>
     nnoremap <buffer> tw<CR> :call slim#configure#attemptLogin()<CR>:w<CR>
     com! W call slim#configure#saveConfigAndLoad() | :w
     exe '/Workspace'
-endfunction
-
-function slim#Listen()
-    " let l:lines = readfile(g:data_path.'/workspaces/'.g:current_workspace.'/channel.slimc')
-    " let l:write_lines = []
-    " for l:line in l:lines
-    "     let l:channel_id = matchstr(l:line, '\[=\zs.*\ze=\]')
-    "     if !empty(l:channel_id)
-    "         if len(get(g:id_map.slack_channel, l:channel_id, '')) > 0
-    "             let l:command = '* * * * *' . ' cd ' . g:data_path . '; for i in {1..15}; do vim -c ":call slim#loadPath()" -c ":call slim#util#loadIdMap()" -c ":call slim#app#requestChannelHistory(' . "'" . get(g:id_map.slack_channel, l:channel_id) . "'" . ')" -c ":q"; sleep 4; done'
-    "             let l:write_lines = add(l:write_lines, l:command)
-    "             " call slim#app#requestChannelHistory(get(g:id_map.slack_channel, l:channel_id))
-    "         endif
-    "     endif
-    " endfor
-    " call writefile(l:write_lines, g:data_path.'/listen_cron')
-    " call system('crontab '.g:data_path.'/listen_cron')
 endfunction
 
 function slim#loadPath()
