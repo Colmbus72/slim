@@ -43,7 +43,6 @@ function! s:openChannelList(workspace)
         \ . a:workspace
         \ .'/channel.slimc'
     nnoremap <buffer> <CR> 0wvt[h"zy:call slim#app#changeChannel(@z)<CR>
-    " call slim#app#requestChannelHistory(g:current_workspace_channel)
 endfunction
 
 function! s:openChannel(workspace, channel)
@@ -59,7 +58,6 @@ function! s:openWorkspaceList()
     execute 'sp '.g:data_path 
         \ .'/workspaces/'
         \ .'/workspace.slimc'
-    " nnoremap <buffer> <CR> $2hvT[l"wy:call slim#app#changeWorkspace(@w)<CR>
     nnoremap <buffer> <CR> 0f[2lvt]h"wy:call slim#app#changeWorkspace(@w)<CR>
     call s:loadWorkspaceMappings()
 endfunction
@@ -152,26 +150,6 @@ function! slim#app#requestChannelHistory(channel_name)
         call add(l:lines, '-------')
         call add(l:lines, l:text)
         call add(l:lines, '')
-        " let l:message_line = l:user_name 
-        "     \ . ' ' . l:time
-        "     \ . ' [=' . l:user_id . '=]'
-        "     \ . '\n'. l:text 
-        " call add(l:lines, l:message_line)
-
-
-        " if has_key(l:convo, 'is_channel')
-        "     if eval(l:convo.is_channel) || eval(l:convo.is_group)
-        "         if l:convo.is_private
-        "             let l:channel_line = '🔒#'
-        "         else
-        "             let l:channel_line = '#'
-        "         endif
-        "         let l:channel_line = l:channel_line . l:convo.name .' [='. l:convo.id .'=]'
-        "         call add(l:lines, l:channel_line)
-        "     endif
-        " endif
-        " TODO: add other types of conversations:
-        " ims, multi person ims
     endfor
     let l:file_path = g:data_path
         \ . '/workspaces/'

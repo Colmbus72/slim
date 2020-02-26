@@ -5,7 +5,6 @@
 
 function! slim#configure#attemptLogin()
     let l:data = s:parseLoginFile()
-    " call slim#util#updateConfig('test', {"s:workspaces": l:data})
     for [l:key, l:token] in items(l:data)
         let l:response = s:loadWorkspaceConfigs('test', l:token, l:key)
         exe '/'. l:token
@@ -99,6 +98,7 @@ function! s:requestWorkspaceInfo(env, workspace_token, mapping)
     call writefile(l:lines, l:file_path, 'a')
     return l:decoded.team.name
 endfunction
+
 " Request the workspaces members and parse them to local file
 " params:
 "    'env': string ['test' returns true or errors, '' writes to config files]
@@ -130,10 +130,7 @@ function! s:requestWorkspaceMembers(env, workspace_token, workspace_name)
     if a:env ==# 'test'
         return 1
     endif
-    " if !has_key(g:id_map.slack_workspace, a:workspace_token)
-    "     return 1
-    " endif
-    " get(g:id_map.slack_workspace, a:workspace_token)
+
     for l:member in l:decoded.members
         let l:member_line = (has_key(l:member, 'real_name') ? l:member.real_name : l:member.name) .' [='. l:member.id .'=]'
         call add(l:lines, l:member_line)
