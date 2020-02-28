@@ -1,5 +1,13 @@
 # slim
+         ______     __         __     __    __
+        /\  ___\   /\ \       /\ \   /\ "-./  \
+        \ \___  \  \ \ \____  \ \ \  \ \ \-./\ \
+         \/\_____\  \ \_____\  \ \_\  \ \_\ \ \_\
+          \/_____/   \/_____/   \/_/   \/_/  \/_/
+
 Interact with slack using vim!
+
+![](https://gph.is/g/4bBP6Yo)
 
 Disclaimer:
     This is my first vim plugin and I know I am doing some things wrong, I would love to know how to make this better.
