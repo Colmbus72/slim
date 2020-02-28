@@ -1,7 +1,8 @@
 function! slim#app#init()
     tabe editor
     nnoremap <leader>q :tabc<CR>
-    nnoremap <leader>l :call slim#app#requestChannelHistory(g:current_workspace_channel)<CR>
+    nnoremap <leader>l :call slim#app#requestChannelHistory(g:current_workspace_channel)<CR>:checktime<CR>
+    nnoremap <leader>b <c-w>l<c-w>jA
     nnoremap <leader>c <c-w>h<c-w>j/
 
     if empty(g:current_workspace)
@@ -27,37 +28,39 @@ function! slim#app#init()
 endfunction
 
 function! s:openEditor(workspace, channel)
-    execute 'e '.g:data_path 
+    execute 'e '.fnameescape(g:data_path 
         \ .'/workspaces/'
         \ .a:workspace
         \ .'/channels/'
         \ .a:channel
-        \ .'.slime'
+        \ .'.slime')
     inoremap <buffer> <ESC> <ESC>:w<CR>
     nnoremap <buffer> <leader>w ggVG"md:call slim#app#sendMessage(@m, '')<CR>:w<CR><c-w>kj<c-w>j
 endfunction
 
 function! s:openChannelList(workspace)
-    execute 'sp '.g:data_path 
+    execute 'sp '.fnameescape(g:data_path 
         \ .'/workspaces/'
         \ . a:workspace
-        \ .'/channel.slimc'
+        \ .'/channel.slimc')
     nnoremap <buffer> <CR> 0wvt[h"zy:call slim#app#changeChannel(@z)<CR>
 endfunction
 
 function! s:openChannel(workspace, channel)
-    execute 'sp '.g:data_path 
+    execute 'sp '.fnameescape(g:data_path 
         \ .'/workspaces/'
         \ .a:workspace
         \ .'/channels/'
         \ .a:channel
-        \ .'.slimv'
+        \ .'.slimv')
+    " call TailStart()
+    " command! -nargs=0 TailStart call tail#start_tail()
 endfunction
 
 function! s:openWorkspaceList()
-    execute 'sp '.g:data_path 
+    execute 'sp '.fnameescape(g:data_path 
         \ .'/workspaces/'
-        \ .'/workspace.slimc'
+        \ .'/workspace.slimc')
     nnoremap <buffer> <CR> 0f[2lvt]h"wy:call slim#app#changeWorkspace(@w)<CR>
     call s:loadWorkspaceMappings()
 endfunction
@@ -97,6 +100,7 @@ function! slim#app#changeChannel(channel)
     tabclose
     call slim#StartSlack()
     exe "normal! \<c-w>kjk"
+    exe "normal! G"
     " exe normal! \<c-w>h"
     " exe normal! /".@z."\<cr>"
 endfunction
@@ -143,12 +147,14 @@ function! slim#app#requestChannelHistory(channel_name)
     for l:message in l:messages
         let l:user_name = get(g:id_map.slack_member, l:message.user, 'Member')
         let l:user_id = l:message.user
-        let l:text = ' ' .l:message.text
+        let l:text = map(split(l:message.text, '\n'), '"  ".v:val')
+
+        " let l:text = ' ' .substitute(l:message.text, '\^@', '\n', 'g')
         let l:time = strftime("%I:%M %p", l:message.ts)
 
         call add(l:lines, l:user_name . ' ' . l:time . ' [='.l:user_id.'=]')
         call add(l:lines, '-------')
-        call add(l:lines, l:text)
+        call extend(l:lines, l:text)
         call add(l:lines, '')
     endfor
     let l:file_path = g:data_path
