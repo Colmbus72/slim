@@ -7,6 +7,7 @@
 Interact with slack using vim!
 
 ![](login_demo.gif)
+![demo](https://media.giphy.com/media/lQBy7C2NlWMVtCeeAF/giphy.gif)
 
 Disclaimer:
     This is my first vim plugin and I know I am doing some things wrong, I would love to know how to make this better.
