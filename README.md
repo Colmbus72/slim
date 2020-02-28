@@ -1,5 +1,13 @@
 # slim
+         ______     __         __     __    __
+        /\  ___\   /\ \       /\ \   /\ "-./  \
+        \ \___  \  \ \ \____  \ \ \  \ \ \-./\ \
+         \/\_____\  \ \_____\  \ \_\  \ \_\ \ \_\
+          \/_____/   \/_____/   \/_/   \/_/  \/_/
+
 Interact with slack using vim!
+
+![](https://gph.is/g/4bBP6Yo)
 
 Disclaimer:
     This is my first vim plugin and I know I am doing some things wrong, I would love to know how to make this better.
@@ -25,11 +33,12 @@ If you dont have a leader key setup I would recommend doing so.
 
 Commands:
 
-<leader>l - refresh the channel page press  
-<leader>q - close slack
-<leader>c - change to channel list and start search
-<leader>b - change to write buffer and insert at the end 
-<leader>w - send entire write buffer to slack as a message
+`<leader>l` - refresh the channel page
 
+`<leader>q` - close slack
 
+`<leader>c` - change to channel list and start search
 
+`<leader>b` - change to write buffer and insert at the end
+
+`<leader>w` - send entire write buffer to slack as a message
