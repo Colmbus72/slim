@@ -25,11 +25,12 @@ If you dont have a leader key setup I would recommend doing so.
 
 Commands:
 
-`<leader>l` - refresh the channel page press  
+`<leader>l` - refresh the channel page
+
 `<leader>q` - close slack
+
 `<leader>c` - change to channel list and start search
-`<leader>b` - change to write buffer and insert at the end 
+
+`<leader>b` - change to write buffer and insert at the end
+
 `<leader>w` - send entire write buffer to slack as a message
-
-
-
