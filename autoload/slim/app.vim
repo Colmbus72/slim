@@ -53,6 +53,7 @@ function! s:openChannel(workspace, channel)
         \ .'/channels/'
         \ .a:channel
         \ .'.slimv')
+    execute 'w'
     " call TailStart()
     " command! -nargs=0 TailStart call tail#start_tail()
 endfunction

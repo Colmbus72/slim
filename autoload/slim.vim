@@ -14,7 +14,7 @@ endfunction
 
 " TODO: user will setup one command in crontab
 " that will run this every minute.
-" Need to efficiently send off background jobs to write to channel files
+" Need to efficiently send off background jobs to write to channel files only when vim is open and supposed to listen
 function! slim#refreshChannels()
     call slim#loadPath()
     call slim#util#loadIdMap()
@@ -46,6 +46,10 @@ function! slim#refreshChannels()
 endfunction
 
 function! slim#Login()
+    let l:login_path = g:data_path . '/login.slima' 
+    if !filereadable(l:login_path)
+        call system('cp '.g:data_path . '/login_template.slima '. l:login_path)
+    endif
     exe 'tabe '.g:data_path . '/login.slima'
     setlocal nowrap
     nnoremap <buffer> ~ :call slim#configure#addNewWorkspace()<CR>:w<CR>
