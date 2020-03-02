@@ -61,7 +61,7 @@ Using [Pathogen](https://github.com/tpope/vim-pathogen)
 
 Open vim and run `:Slack`
 
-![login_demo](login_demo.gif)
+![login_demo](https://i.imgur.com/xWfQpuE.gif)
 
 Enter your workspace token generated earlier `xoxp-xxx...`
 
