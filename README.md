@@ -81,4 +81,4 @@ Mapping | Function
 `<leader>q` | close slack
 
 ### Demo
-![demo](https://i.imgur.com/LxjkiUa.gifv)
+![demo](https://i.imgur.com/LxjkiUa.gif)
