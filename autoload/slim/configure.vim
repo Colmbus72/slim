@@ -22,9 +22,15 @@ endfunction
 
 function! slim#configure#saveConfigAndLoad()
     let l:data = s:parseLoginFile()
+    if !isdirectory(g:data_path.'/workspaces')
+        call mkdir(g:data_path.'/workspaces',"p")
+    endif
     call writefile([''], g:data_path.'/workspaces/workspace.slimc')
     for [l:key, l:token] in items(l:data)
         let l:response = s:loadWorkspaceConfigs('', l:token, l:key)
+        if !filereadable(g:data_path.'/app_state.vim')
+            call writefile([':let g:current_workspace=""',':let g:current_workspace_channel=""'], g:data_path.'/app_state.vim')
+        endif
         exe '/'. l:token
         exe 'normal! I'.(l:response ==# 'Success' ? 'W ' : 'X ')
         let g:id_map = {}

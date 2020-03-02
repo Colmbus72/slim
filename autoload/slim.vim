@@ -2,6 +2,11 @@ let g:data_path = expand('<sfile>:p:h:h') . '/.data'
 
 function! slim#StartSlack()
     " Source our 'current' variables saved when quiting app
+    if !filereadable(g:data_path . '/app_state.vim')
+        call slim#Login()
+        return
+    endif
+
     exe 'so '.g:data_path . '/app_state.vim'
   
     if !slim#util#loadIdMap()
