@@ -18,9 +18,9 @@ function! slim#util#getCurlCommand(request)
     else
         for [l:param_key, l:param_value] in items(a:request.params)
             let l:data = l:data 
-                \ . " -d '"
-                \ . printf('%s=%s', eval(substitute(shellescape(l:param_key), '\\\n', "\n", 'g')), eval(substitute(shellescape(l:param_value), '\\\n', "\n", 'g')))
-                \ . "'"
+                \ . " -d "
+                \ . printf('%s=%s', substitute(shellescape(l:param_key), '\\\n', "\n", 'g'), substitute(shellescape(l:param_value), '\\\n', "\n", 'g'))
+                \ . ""
         endfor
     endif 
     let l:curl_request = printf(l:curl_fmt, l:flags, l:method, l:data, l:url)
